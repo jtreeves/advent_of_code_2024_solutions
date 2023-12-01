@@ -1,1 +1,3 @@
-# advent_of_code_2023_solutions
+# Advent of Code: 2023 - Solutions
+
+The annual tradition continues!
