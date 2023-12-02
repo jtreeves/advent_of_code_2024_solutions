@@ -14,12 +14,8 @@ def combine_first_and_last_numbers_from_line_into_new_number(numbers_array):
     first_and_last_numbers = determine_first_and_last_numbers_for_line(numbers_array)
     first_number = first_and_last_numbers[0]
     last_number = first_and_last_numbers[1]
-    print('FIRST NUMBER:', first_number)
-    print('LAST NUMBER:', last_number)
     composite_string = str(first_number) + str(last_number)
-    print('COMPOSITE STRING:', composite_string)
     composite_number = int(composite_string)
-    print('COMPOSITE NUMBER:', composite_number)
     return composite_number
 
 def determine_first_and_last_numbers_for_line(numbers_array):

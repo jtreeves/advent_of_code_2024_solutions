@@ -2,11 +2,63 @@ def solution():
     data = extract_data_from_file()
     games = list_games(data)
     info_for_all_games = compile_info_for_all_games(games)
+    id_sum = sum_all_ids_possible_with_rules(info_for_all_games)
+    power_sum = sum_powers_of_all_games(info_for_all_games)
+    result = {
+        "id_sum": id_sum,
+        "power_sum": power_sum
+    }
+    return result
+
+def sum_powers_of_all_games(all_game_infos: [dict]) -> int:
+    power_sum = 0
+    for game_info in all_game_infos:
+        scenarios = game_info["scenarios"]
+        minimum_blocks_required = determine_minimum_blocks_required_across_all_scenarios(scenarios)
+        game_power = calculate_power_of_game(minimum_blocks_required)
+        power_sum += game_power
+    return power_sum
+
+def sum_all_ids_possible_with_rules(all_game_infos: [dict]) -> int:
     id_sum = 0
-    for game_info in info_for_all_games:
+    for game_info in all_game_infos:
         game_id = get_game_id_if_all_scenarios_possible(game_info, [{"color": "red", "count": 12}, {"color": "green", "count": 13}, {"color": "blue", "count": 14}])
         id_sum += game_id
     return id_sum
+
+def calculate_power_of_game(color_counts: [dict]) -> int:
+    power = 1
+    for color_count in color_counts:
+        power *= color_count["count"]
+    return power
+
+def determine_minimum_blocks_required_across_all_scenarios(scenarios: [[dict]]) -> [dict]:
+    max_red = 0
+    max_green = 0
+    max_blue = 0
+    for scenario in scenarios:
+        for block_details in scenario:
+            if block_details["color"] == "red" and block_details["count"] > max_red:
+                max_red = block_details["count"]
+            if block_details["color"] == "green" and block_details["count"] > max_green:
+                max_green = block_details["count"]
+            if block_details["color"] == "blue" and block_details["count"] > max_blue:
+                max_blue = block_details["count"]
+    minimum_blocks_required = [
+        {
+            "color": "red",
+            "count": max_red
+        },
+        {
+            "color": "green",
+            "count": max_green
+        },
+        {
+            "color": "blue",
+            "count": max_blue
+        }
+    ]
+    return minimum_blocks_required
 
 def get_game_id_if_all_scenarios_possible(game_info: dict, color_count_rules: [dict]) -> int:
     game_id = game_info["id"]
