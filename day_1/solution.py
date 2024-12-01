@@ -42,15 +42,36 @@ def sum_differences(differences: List[int]) -> int:
     return total
 
 
+def get_frequency_in_list(target: int, source: List[int]) -> int:
+    count = 0
+    for i in range(len(source)):
+        if source[i] == target:
+            count += 1
+    return count
+
+
+def calculate_similarity_score_for_target(target: int, source: List[int]) -> int:
+    count = get_frequency_in_list(target, source)
+    score = target * count
+    return score
+
+
+def calculate_total_similarity_score(first_list: List[int], second_list: List[int]) -> int:
+    total = 0
+    for i in range(len(first_list)):
+        score = calculate_similarity_score_for_target(first_list[i], second_list)
+        total += score
+    return total
+
+
 def solve_problem(is_official: bool) -> SolutionResults:
     start_time = time.time()
     data = extract_data_from_file(1, is_official)
     rows = get_list_of_lines(data)
     lists = create_lists(rows)
     differences = get_list_differences(lists)
-    total = sum_differences(differences)
-    part_1 = total
-    part_2 = len(rows)
+    part_1 = sum_differences(differences)
+    part_2 = calculate_total_similarity_score(lists["first_list"], lists["second_list"])
     end_time = time.time()
     execution_time = end_time - start_time
     results = SolutionResults(1, part_1, part_2, execution_time)
