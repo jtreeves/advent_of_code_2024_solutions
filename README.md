@@ -136,5 +136,3 @@ I would to include solutions to each day's problems in multiple programming lang
 -   Fortran
 
 It would be cute to orient it as 12 Coding Languages of Christmas, if I end up being able to add all of them. If I really wanted to stretch, I could somehow do 25 languages total and include things like SQL.
-
-SUPERFICIAL CHANGE
