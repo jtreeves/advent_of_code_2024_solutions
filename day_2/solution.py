@@ -28,7 +28,7 @@ def determine_consistent_direction_with_dampener(vector: List[int], problems: in
         return False
     for i in range(len(vector) - 2):
         if (vector[i] < vector[i + 1] and vector[i + 1] > vector[i + 2]) or (vector[i] > vector[i + 1] and vector[i + 1] < vector[i + 2]):
-            return determine_consistent_direction_with_dampener(vector[:i] + vector[i:], problems + 1)
+            return determine_consistent_direction_with_dampener(vector[:i + 1] + vector[i + 2:], problems + 1)
     return True
 
 
@@ -46,7 +46,7 @@ def determine_acceptable_variance_with_dampener(vector: List[int], problems: int
     for i in range(len(vector) - 1):
         difference = abs(vector[i] - vector[i + 1])
         if difference == 0 or difference > 3:
-            return determine_acceptable_variance_with_dampener(vector[:i] + vector[i:], problems + 1)
+            return determine_acceptable_variance_with_dampener(vector[:i] + vector[i + 1:], problems + 1)
     return True
 
 
@@ -58,11 +58,8 @@ def determine_safety(vector: List[int]) -> bool:
 
 
 def determine_safety_with_dampener(vector: List[int]) -> bool:
-    print("VECTOR:", vector)
     consistent = determine_consistent_direction_with_dampener(vector)
-    print("CONSISTENT:", consistent)
     acceptable = determine_acceptable_variance_with_dampener(vector)
-    print("ACCEPTABLE:", acceptable)
     safe = consistent and acceptable
     return safe
 
