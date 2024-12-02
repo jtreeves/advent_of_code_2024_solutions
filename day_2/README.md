@@ -45,6 +45,8 @@ Analyze the unusual data from the engineers. How many reports are safe?
 
 ### Solution
 
+230
+
 ## Part Two
 
 ### Problem

@@ -14,7 +14,7 @@ def extract_levels(report: str) -> List[int]:
 def determine_consistent_direction(vector: List[int]) -> bool:
     total_elements = len(vector)
     increases, decreases = 0, 0
-    for i in range(total_elements - 2):
+    for i in range(total_elements - 1):
         if vector[i] < vector[i + 1]:
             increases += 1
         if vector[i] > vector[i + 1]:
@@ -24,7 +24,7 @@ def determine_consistent_direction(vector: List[int]) -> bool:
 
 
 def determine_acceptable_variance(vector: List[int]) -> bool:
-    for i in range(len(vector) - 2):
+    for i in range(len(vector) - 1):
         difference = abs(vector[i] - vector[i + 1])
         if difference == 0 or difference > 3:
             return False
