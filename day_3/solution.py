@@ -14,8 +14,8 @@ def remove_all_off_blocks(corrupted_input: str) -> str:
     on_input = ""
     begin_on_blocks = corrupted_input.split("do()")
     for block in begin_on_blocks:
-        first_dont = block.find("don't()")
-        on_block = block[:first_dont]
+        sections = block.split("don't()")
+        on_block = sections[0]
         on_input += on_block
     return on_input
 
