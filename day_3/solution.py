@@ -10,30 +10,16 @@ def find_all_mul_expressions(corrupted_input: str) -> list[str]:
     return mul_expressions
 
 
-def find_indices_for_all_off_blocks(corrupted_input: str) -> list[tuple[int, int]]:
-    off_blocks_indices = []
+def remove_all_off_blocks(corrupted_input: str) -> str:
+    on_input = ""
     current_index = 0
     any_dont_left = True
     while current_index < len(corrupted_input) and any_dont_left:
         first_dont = corrupted_input[current_index:].find("don't()")
         first_do_after_dont = corrupted_input[first_dont:].find("do()")
-        endpoints = (first_dont, first_do_after_dont)
-        off_blocks_indices.append(endpoints)
-        current_index = first_dont
+        on_input += corrupted_input[current_index:first_dont]
+        current_index = first_do_after_dont
         any_dont_left = corrupted_input[current_index:].find("don't()") != -1
-    return off_blocks_indices
-
-
-def remove_all_off_blocks(corrupted_input: str) -> str:
-    on_input = ""
-    current_index = 0
-    current_block = 0
-    off_block_indices = find_indices_for_all_off_blocks(corrupted_input)
-    while current_index < len(corrupted_input) and current_block < len(off_block_indices):
-        start, end = off_block_indices[current_block]
-        on_input += corrupted_input[current_index:start]
-        current_index = end
-        current_block += 1
     return on_input
 
 
