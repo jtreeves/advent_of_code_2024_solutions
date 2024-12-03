@@ -20,6 +20,8 @@ def remove_all_off_blocks(corrupted_input: str) -> str:
         on_input += corrupted_input[current_index:first_dont]
         current_index = first_do_after_dont
         any_dont_left = corrupted_input[current_index:].find("don't()") != -1
+        print("CURRENT INDEX:", current_index)
+        print("ANY DON'T LEFT:", any_dont_left)
     on_input += corrupted_input[current_index:]
     return on_input
 
