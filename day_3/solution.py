@@ -16,10 +16,11 @@ def remove_all_off_blocks(corrupted_input: str) -> str:
     any_dont_left = True
     while current_index < len(corrupted_input) and any_dont_left:
         first_dont = corrupted_input[current_index:].find("don't()")
-        first_do_after_dont = corrupted_input[first_dont:].find("do()")
+        first_do_after_dont = corrupted_input[first_dont:].find("do()") + first_dont
         on_input += corrupted_input[current_index:first_dont]
         current_index = first_do_after_dont
         any_dont_left = corrupted_input[current_index:].find("don't()") != -1
+    on_input += corrupted_input[current_index:]
     return on_input
 
 
