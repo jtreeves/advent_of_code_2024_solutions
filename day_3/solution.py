@@ -13,14 +13,14 @@ def find_all_mul_expressions(corrupted_input: str) -> list[str]:
 def remove_all_off_blocks(corrupted_input: str) -> str:
     on_input = ""
     current_index = 0
-    any_dont_and_do_left = True
-    while current_index < len(corrupted_input) and any_dont_and_do_left:
+    any_dont_left = True
+    while current_index < len(corrupted_input) and any_dont_left:
         first_dont = corrupted_input.find("don't()", current_index)
         first_do_after_dont = corrupted_input.find("do()", current_index)
         on_input += corrupted_input[current_index:first_dont]
         current_index = first_do_after_dont
         corrupted_input = corrupted_input[current_index:]
-        any_dont_and_do_left = corrupted_input[current_index:].find("don't()") != -1 and corrupted_input[corrupted_input[current_index:].find("don't()"):].find("do()") != -1
+        any_dont_left = corrupted_input[current_index:].find("don't()") != -1
     on_input += corrupted_input
     return on_input
 
